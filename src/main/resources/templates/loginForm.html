@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{Style/style.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="intestazione">
+        <h1>Libreria Store</h1>
+    </div>
+    <div class="contenuto">
+        <form action="#" th:action="@{/login}" method="post">
+            <h2>Login</h2>
+            <div class="colonna">
+                <label for="username">Inserisci il tuo username</label>
+                <input id="username" type="text" name="username" placeholder="inserisci username"/>
+            </div>
+            <div class="colonna">
+                <label for="passw">Inserisci la password</label>
+                <input id="passw" type="password" name="password" placeholder="inserisci password"/>
+            </div>
+            <div class="pulsanti">
+                <button class="reset" type="reset">Reset</button>
+                <button class="submit" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

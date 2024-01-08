@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <link th:href="@{Style/style.css}" rel="stylesheet" />
+</head>
+<body>
+  <div class="intestazione">
+    <h1>Libreria Store</h1>
+  </div>
+  <div class="contenuto">
+    <form action="#" th:action="@{/}" th:object="${user}" method="post">
+      <h2>Registrazione utente</h2>
+      <div class="colonna">
+        <label for="nome">Inserisci il tuo nome</label>
+        <input id="nome" type="text" th:field="*{nome}" placeholder="inserisci il nome" />
+        <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome non conforme</p>
+      </div>
+      <div class="colonna">
+        <label for="cognome">Inserisci il tuo cognome</label>
+        <input id="cognome" type="text" th:field="*{cognome}" placeholder="inserisci il cognome"/>
+        <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}">Cognome non conforme</p>
+      </div>
+      <div class="colonna">
+        <label for="username">Inserisci il tuo username</label>
+        <input id="username" type="text" th:field="*{username}" placeholder="inserisci username"/>
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username non conforme</p>
+      </div>
+      <div class="colonna">
+        <label for="password">Inserisci la password</label>
+        <input id="password" type="password" th:field="*{password}" placeholder="inserisci password"/>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password non conforme</p>
+      </div>
+      <div class="pulsanti">
+        <button class="reset" type="reset">Reset</button>
+        <button class="submit" type="submit">Registrati</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
