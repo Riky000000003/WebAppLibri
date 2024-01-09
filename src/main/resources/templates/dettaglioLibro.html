@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettaglio Libro</title>
+    <link th:href="@{Style/styleLibro.css}" rel="stylesheet" />
 </head>
 <body>
     <div class="intestazione">
         <h1>Libro</h1>
     </div>
     <div class="contenuto">
+        <div class="menu">
+            <a href="/profilo">Profilo</a>
+            <a href="/home">Elenco Libri</a>
+            <a href="/aggiungi">Aggiungi Libro</a>
+        </div>
         <div class="libro">
             <h3>Titolo: Pippo</h3>
             <p>Autore: AAAA</p>

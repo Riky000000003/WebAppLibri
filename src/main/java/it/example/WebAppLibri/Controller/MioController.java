@@ -64,6 +64,16 @@ public class MioController {
         return "home";
     }
 
+    @GetMapping(value = "/profilo")
+    public String profiloPage() {
+        return "dettaglioUtente";
+    }
+
+    @GetMapping(value = "/libro")
+    public String libroPage() {
+        return "dettaglioLibro";
+    }
+
     @GetMapping(value = "/aggiungi")
     public String aggiungiForm(Libro libro) {
         return "libroForm";

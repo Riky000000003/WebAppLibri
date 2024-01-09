@@ -1,0 +1,69 @@
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+.intestazione
+{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blanchedalmond;
+    border: 1px solid black;
+}
+
+.intestazione > h1
+{
+    text-transform: uppercase;
+    font-size: 35px;
+}
+
+.contenuto
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.contenuto > .menu
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.menu > a
+{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.contenuto> .libro
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    background-color: bisque;
+    border: 1px solid black;
+}
+
+
+
+
