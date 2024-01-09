@@ -56,7 +56,12 @@ public class MioController {
             return "loginForm";
         }
         model.addAttribute("statoErrore", false);
-        return "redirect:/aggiungi";
+        return "redirect:/home";
+    }
+
+    @GetMapping(value = "/home")
+    public String homePage() {
+        return "home";
     }
 
     @GetMapping(value = "/aggiungi")
