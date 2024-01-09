@@ -15,27 +15,28 @@
       <div class="colonna">
         <label for="nome">Inserisci il tuo nome</label>
         <input id="nome" type="text" th:field="*{nome}" placeholder="inserisci il nome" />
-        <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome non conforme</p>
+        <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
       </div>
       <div class="colonna">
         <label for="cognome">Inserisci il tuo cognome</label>
         <input id="cognome" type="text" th:field="*{cognome}" placeholder="inserisci il cognome"/>
-        <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}">Cognome non conforme</p>
+        <p style="color: red; font-size: 13px"  th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></p>
       </div>
       <div class="colonna">
         <label for="username">Inserisci il tuo username</label>
         <input id="username" type="text" th:field="*{username}" placeholder="inserisci username"/>
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username non conforme</p>
+        <p style="color: red; font-size: 13px"  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
       </div>
       <div class="colonna">
         <label for="password">Inserisci la password</label>
         <input id="password" type="password" th:field="*{password}" placeholder="inserisci password"/>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password non conforme</p>
+        <p  style="color: red; font-size: 13px" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
       </div>
       <div class="pulsanti">
         <button class="reset" type="reset">Reset</button>
         <button class="submit" type="submit">Registrati</button>
       </div>
+      <p style="color: red; font-size: 13px" th:if="${statoErrore}" th:text="${errore}"></p>
     </form>
   </div>
 </body>

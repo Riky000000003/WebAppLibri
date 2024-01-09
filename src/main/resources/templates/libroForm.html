@@ -15,22 +15,22 @@
             <div class="colonna">
                 <label for="titolo">Inserisci il titolo del libro</label>
                 <input id="titolo" type="text" th:field="*{titolo}" placeholder="inserisci titolo"/>
-                <p th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}">titolo non conforme</p>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}">titolo non conforme</p>
             </div>
             <div class="colonna">
                 <label for="autore">Inserisci il nome dell'autore</label>
                 <input id="autore" type="text" th:field="*{autore}" placeholder="inserisci autore"/>
-                <p th:if="${#fields.hasErrors('autore')}" th:errors="*{autore}">Autore non conforme</p>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('autore')}" th:errors="*{autore}">Autore non conforme</p>
             </div>
             <div class="colonna">
                 <label for="anno">Inserisci l'anno di pubblicazione</label>
                 <input id="anno" type="number" th:field="*{annoPubblicazione}" placeholder="inserisci anno"/>
-                <p th:if="${#fields.hasErrors('annoPubblicazione')}" th:errors="*{annoPubblicazione}">Anno pubblicazione non conforme</p>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('annoPubblicazione')}" th:errors="*{annoPubblicazione}">Anno pubblicazione non conforme</p>
             </div>
             <div class="colonna">
                 <label for="prezzo">Inserisci il prezzo</label>
                 <input id="prezzo" type="number" th:field="*{prezzo}" placeholder="inserisci prezzo"/>
-                <p th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}">Prezzo non conforme</p>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}">Prezzo non conforme</p>
             </div>
             <div class="pulsanti">
                 <button class="reset" type="reset">Reset</button>

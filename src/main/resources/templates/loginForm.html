@@ -10,20 +10,23 @@
         <h1>Libreria Store</h1>
     </div>
     <div class="contenuto">
-        <form action="#" th:action="@{/login}" method="post">
+        <form action="#" th:action="@{/login}" th:object="${user}" method="post">
             <h2>Login</h2>
             <div class="colonna">
-                <label for="username">Inserisci il tuo username</label>
-                <input id="username" type="text" name="username" placeholder="inserisci username"/>
+                <label for="user">Inserisci il tuo username</label>
+                <input id="user" type="text" th:field="*{username}" placeholder="inserisci username"/>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
             <div class="colonna">
                 <label for="passw">Inserisci la password</label>
                 <input id="passw" type="password" name="password" placeholder="inserisci password"/>
+                <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
             <div class="pulsanti">
                 <button class="reset" type="reset">Reset</button>
                 <button class="submit" type="submit">Login</button>
             </div>
+            <p th:if="${statoErrore}"  style="color: red; font-size: 13px" th:text="${errore}"></p>
         </form>
     </div>
 </body>

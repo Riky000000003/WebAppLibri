@@ -4,6 +4,7 @@ import it.example.WebAppLibri.Model.Libro;
 import it.example.WebAppLibri.Model.User;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 @Controller
 public class MioController {
 
-    private List<User> utenti = new ArrayList<>();
+    public List<User> utenti = new ArrayList<>();
     public  List<Libro> libri = new ArrayList<>();
 
     @GetMapping(value = "/")
@@ -24,29 +25,37 @@ public class MioController {
     }
 
     @PostMapping(value = "/")
-    public String postRegistraForm(@Valid User user, BindingResult bindingResult) {
+    public String postRegistraForm(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("statoErrore", false);
             return "formUtente";
         }
         if (controllaUsername(user.getUsername())) {
+            model.addAttribute("statoErrore", true);
+            model.addAttribute("errore", "Utente non registrato, questo username è gia registrato");
             return "formUtente";
         }
+        model.addAttribute("statoErrore", false);
         utenti.add(user);
         return "redirect:/login";
     }
 
     @GetMapping(value = "/login")
-    public String loginForm() {
+    public String loginForm(User user) {
         return "loginForm";
     }
 
     @PostMapping(value = "/login")
-    public String postLoginForm(@RequestParam("username") String username,
-                                @RequestParam("password") String password) {
-
-        if (!login(username,password)) {
+    public String postLoginForm(@Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasFieldErrors("username") || bindingResult.hasFieldErrors("password")) {
+            model.addAttribute("statoErrore", false);
+            return "loginForm";
+        } else if (!login(user.getUsername(),user.getPassword())){
+            model.addAttribute("statoErrore", true);
+            model.addAttribute("errore", "Utente non Loggato");
             return "loginForm";
         }
+        model.addAttribute("statoErrore", false);
         return "redirect:/aggiungi";
     }
 

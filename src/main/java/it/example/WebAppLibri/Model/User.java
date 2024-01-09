@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "nome non conforme min = 2, max = 20")
     private String nome;
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "cognome non conforme min = 2, max = 20")
     private String cognome;
-    @Size(min = 5, max = 20)
+    @NotNull
+    @Size(min = 5, max = 20, message = "username non conforme min = 5, max = 20")
     private String username;
-    @Size(min = 5, max = 20)
+    @NotNull
+    @Size(min = 5, max = 20, message = "password non conforme min = 5, max = 20")
     private String password;
     public String getNome() {
         return nome;
