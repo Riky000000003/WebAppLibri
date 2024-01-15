@@ -100,6 +100,11 @@ public class MioController {
             return "libroForm";
         }
         User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("statoErrore", false);
+            model.addAttribute("errore", "Errore non sei loggato");
+            return "redirect:/login";
+        }
         libro.setUtente(user);
         libroRepository.save(libro);
         return "redirect:/home";

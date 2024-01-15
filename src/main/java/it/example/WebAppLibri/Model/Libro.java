@@ -21,13 +21,15 @@ public class Libro {
     @Size(min = 3, max = 20, message = "autore non conforme min = 3, max = 20")
     private String autore;
     @Column(name = "Anno di Pubblicazione")
+    @NotNull(message = "errore, campo obbligatorio")
     @Min(value = 1930, message = "anno deve superiore a 1930")
     @Max(value = 2024, message = "anno deve essere inferiore a 2024")
     private Integer annoPubblicazione;
     @Column(name = "Prezzo")
+    @NotNull(message = "errore, campo obbligatorio")
     @Min(value = 1, message = "prezzo deve essere superiore a 1")
     private Integer prezzo;
-    @NotNull
+
     @ManyToOne
     @JoinColumn(name = "id_utente")
     private User utente;
