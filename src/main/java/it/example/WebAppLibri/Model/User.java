@@ -1,13 +1,19 @@
 package it.example.WebAppLibri.Model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class User {
+@Entity
+@Table(name = "Utenti")
+public class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Size(min = 2, max = 20, message = "nome non conforme min = 2, max = 20")
     private String nome;
     @Size(min = 2, max = 20, message = "cognome non conforme min = 2, max = 20")
@@ -18,6 +24,15 @@ public class User {
     @NotNull
     @Size(min = 5, max = 20, message = "password non conforme min = 5, max = 20")
     private String password;
+    @OneToMany(mappedBy = "utente")
+    private Set<Libro> libri = new HashSet<>();
+    public User() {}
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getNome() {
         return nome;
     }

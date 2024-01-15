@@ -16,10 +16,10 @@
             <a href="/aggiungi">Aggiungi Libro</a>
         </div>
         <div class="utente">
-            <h3>Nome: Riccardo</h3>
-            <p>Cognome: Frigerio</p>
-            <p>Username: Riky03</p>
-            <p>Password: 12345</p>
+            <h3>Nome: <span th:text="${utente.nome}"></span></h3>
+            <p>Cognome: <span th:text="${utente.cognome}"></span></p>
+            <p>Username: <span th:text="${utente.username}"></span></p>
+            <p>Password: <span th:text="${utente.password}"></span></p>
         </div>
     </div>
 </body>

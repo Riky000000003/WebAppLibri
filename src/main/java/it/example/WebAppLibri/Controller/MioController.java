@@ -1,12 +1,18 @@
 package it.example.WebAppLibri.Controller;
 
+import it.example.WebAppLibri.Dao.LibroDao;
+import it.example.WebAppLibri.Dao.UserDao;
 import it.example.WebAppLibri.Model.Libro;
 import it.example.WebAppLibri.Model.User;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.apache.juli.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,9 +21,10 @@ import java.util.List;
 
 @Controller
 public class MioController {
-
-    public List<User> utenti = new ArrayList<>();
-    public  List<Libro> libri = new ArrayList<>();
+    @Autowired
+    private UserDao userRepository;
+    @Autowired
+    private LibroDao libroRepository;
 
     @GetMapping(value = "/")
     public String registraForm(User user) {
@@ -30,13 +37,12 @@ public class MioController {
             model.addAttribute("statoErrore", false);
             return "formUtente";
         }
-        if (controllaUsername(user.getUsername())) {
+        if (userRepository.registrazione(user.getUsername()) != null) {
             model.addAttribute("statoErrore", true);
-            model.addAttribute("errore", "Utente non registrato, questo username è gia registrato");
+            model.addAttribute("errore", "username dell'utente esiste già");
             return "formUtente";
         }
-        model.addAttribute("statoErrore", false);
-        utenti.add(user);
+        userRepository.save(user);
         return "redirect:/login";
     }
 
@@ -46,31 +52,39 @@ public class MioController {
     }
 
     @PostMapping(value = "/login")
-    public String postLoginForm(@Valid User user, BindingResult bindingResult, Model model) {
+    public String postLoginForm(@Valid User user, BindingResult bindingResult, Model model, HttpSession httpSession) {
         if (bindingResult.hasFieldErrors("username") || bindingResult.hasFieldErrors("password")) {
             model.addAttribute("statoErrore", false);
             return "loginForm";
-        } else if (!login(user.getUsername(),user.getPassword())){
+        }
+        User utenteLoggato = userRepository.login(user.getUsername(), user.getPassword());
+        if (utenteLoggato == null){
             model.addAttribute("statoErrore", true);
             model.addAttribute("errore", "Utente non Loggato");
             return "loginForm";
+        } else {
+            httpSession.setAttribute("user", utenteLoggato);
         }
-        model.addAttribute("statoErrore", false);
         return "redirect:/home";
     }
 
     @GetMapping(value = "/home")
-    public String homePage() {
+    public String homePage(Model model) {
+        model.addAttribute("libri", libroRepository.findAll());
         return "home";
     }
 
     @GetMapping(value = "/profilo")
-    public String profiloPage() {
+    public String profiloPage(Model model, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        model.addAttribute("utente", user);
         return "dettaglioUtente";
     }
 
-    @GetMapping(value = "/libro")
-    public String libroPage() {
+    @GetMapping(value = "/libro/{id}")
+    public String libroPage(@PathVariable("id")long id, Model model) {
+        Libro libro = libroRepository.findById(id);
+        model.addAttribute("libro", libro);
         return "dettaglioLibro";
     }
 
@@ -80,35 +94,14 @@ public class MioController {
     }
 
     @PostMapping(value = "/aggiungi")
-    public String postAggiungiForm(@Valid Libro libro, BindingResult bindingResult) {
+    public String postAggiungiForm(@Valid Libro libro, BindingResult bindingResult, Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("statoErrore", false);
             return "libroForm";
         }
-        libri.add(libro);
-        return "redirect:/risultato";
+        User user = (User) httpSession.getAttribute("user");
+        libro.setUtente(user);
+        libroRepository.save(libro);
+        return "redirect:/home";
     }
-
-    @GetMapping(value = "/risultato")
-    public String getRisultato() {
-        return "risultato";
-    }
-
-    public boolean controllaUsername(String username) {
-        for (User user: utenti) {
-            if (user.getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean login(String username, String password) {
-        for (User user: utenti) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

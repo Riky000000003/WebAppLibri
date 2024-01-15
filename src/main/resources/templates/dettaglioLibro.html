@@ -16,10 +16,10 @@
             <a href="/aggiungi">Aggiungi Libro</a>
         </div>
         <div class="libro">
-            <h3>Titolo: Pippo</h3>
-            <p>Autore: AAAA</p>
-            <p>Anno Pubblicazione: 2023</p>
-            <p>Prezzo: 20€</p>
+            <h3 th:text="'Titolo: ' +${libro.titolo}"></h3>
+            <p th:text="'Autore: ' +${libro.autore}"></p>
+            <p th:text="'Anno Pubblicazione: ' +${libro.autore}"></p>
+            <p th:text="'Prezzo: ' +${libro.prezzo}"></p>
         </div>
     </div>
 </body>

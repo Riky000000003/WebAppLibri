@@ -10,7 +10,7 @@
         <h1>Libreria Store</h1>
     </div>
     <div class="contenuto">
-        <form action="#" th:action="@{/aggiungi}" th:object="${libro}" method="post">
+        <form th:action="@{/aggiungi}" th:object="${libro}" method="post">
             <h2>Aggiungi Libro</h2>
             <div class="colonna">
                 <label for="titolo">Inserisci il titolo del libro</label>
@@ -37,6 +37,7 @@
                 <button class="submit" type="submit">Aggiungi</button>
             </div>
         </form>
+        <p style="color: red; font-size: 13px" th:if="${statoErrore}" th:text="${errore}"></p>
     </div>
 </body>
 </html>
