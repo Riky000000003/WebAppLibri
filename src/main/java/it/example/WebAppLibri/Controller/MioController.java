@@ -110,4 +110,25 @@ public class MioController {
         return "redirect:/home";
     }
 
+    @GetMapping("/modifica/{idLibro}")
+    public String modifica(@PathVariable("idLibro") long idLibro, Model model, HttpSession httpSession, Libro libro) {
+        User user = (User)  httpSession.getAttribute("user");
+        if(user == null) {
+            return "redirect:/login";
+        }
+        Libro libroUtente = libroRepository.findById(idLibro);
+        model.addAttribute("libroUtente", libroUtente);
+        return "modificaLibro";
+    }
+
+    @PostMapping("/modifica/{idLibro}")
+    public String modificaLibro(@Valid Libro libro, @PathVariable("idLibro") long idLibro, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("statoErrore", false);
+            return "modificaLibro";
+        }
+        libroRepository.aggiorna(libro.getTitolo(), libro.getPrezzo(), libro.getAnnoPubblicazione(), libro.getAutore(), idLibro);
+        return "redirect:/home";
+    }
+
 }
