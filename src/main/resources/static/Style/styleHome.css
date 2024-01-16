@@ -64,11 +64,12 @@ body
 
 .listaLibri > .libro
 {
-    width: 40%;
+    width: 30%;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     padding: 10px;
+    margin: 20px;
     background-color: bisque;
     border: 1px solid black;
     border-radius: 20px ;

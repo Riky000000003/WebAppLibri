@@ -2,20 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Libreria Store</title>
-    <link th:href="@{Style/styleHome.css}" rel="stylesheet" />
+    <title>I tuoi Libri</title>
 </head>
 <body>
     <div class="intestazione">
         <h1>Libreria Store</h1>
     </div>
     <div class="contenuto">
-        <div class="menu">
-            <a href="/profilo">Profilo</a>
-            <a href="/home">Elenco Libri</a>
-            <a href="/aggiungi">Aggiungi Libro</a>
-            <a href="/libriUtente">I tuoi Libri</a>
-        </div>
         <div class="listaLibri">
             <th:block th:each="libro : ${libri}">
                 <div class="libro">
@@ -23,7 +16,7 @@
                     <p th:text="'Autore:' + ${libro.autore}"></p>
                     <p th:text="'Anno di pubblicazione:' + ${libro.annoPubblicazione}"></p>
                     <p th:text="'Prezzo:' + ${libro.prezzo}"></p>
-                    <a th:href="'/libro/' + ${libro.id}">Dettaglio</a>
+                    <a th:href="'/libriUtenti/' + ${libro.id}">Dettaglio</a>
                 </div>
             </th:block>
         </div>
