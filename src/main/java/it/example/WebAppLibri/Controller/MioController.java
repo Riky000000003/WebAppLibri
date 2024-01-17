@@ -151,5 +151,10 @@ public class MioController {
         return "redirect:/libri";
     }
 
-
+    @GetMapping(value = "/utenti")
+    public String getListaUtenti(Model model) {
+        List<User> utenti = (List<User>) userRepository.findAll();
+        model.addAttribute("utenti", utenti);
+        return "listaUtenti";
+    }
 }
