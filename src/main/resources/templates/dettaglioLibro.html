@@ -11,9 +11,9 @@
     </div>
     <div class="contenuto">
         <div class="menu">
-            <a href="/profilo">Profilo</a>
-            <a href="/home">Elenco Libri</a>
+            <a href="/home">Home</a>
             <a href="/aggiungi">Aggiungi Libro</a>
+            <a href="/profilo">Profilo</a>
         </div>
         <div class="libro">
             <h3 th:text="'Titolo: ' +${libro.titolo}"></h3>
@@ -21,6 +21,7 @@
             <p th:text="'Anno Pubblicazione: ' +${libro.annoPubblicazione}"></p>
             <p th:text="'Prezzo: ' +${libro.prezzo}"></p>
             <a th:href="'/modifica/' + ${libro.id}">Modifica</a>
+            <a th:href="'/elimina/' + ${libro.id}">Elimina</a>
         </div>
     </div>
 </body>
