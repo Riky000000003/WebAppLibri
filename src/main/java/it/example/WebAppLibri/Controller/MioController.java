@@ -116,8 +116,6 @@ public class MioController {
         if(user == null) {
             return "redirect:/login";
         }
-        Libro libroUtente = libroRepository.findById(idLibro);
-        model.addAttribute("libroUtente", libroUtente);
         return "modificaLibro";
     }
 
@@ -127,7 +125,6 @@ public class MioController {
             model.addAttribute("statoErrore", false);
             return "modificaLibro";
         }
-        libroRepository.aggiorna(libro.getTitolo(), libro.getPrezzo(), libro.getAnnoPubblicazione(), libro.getAutore(), idLibro);
         return "redirect:/home";
     }
 

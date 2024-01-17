@@ -22,7 +22,6 @@ body
 
 .contenuto
 {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,30 +51,76 @@ body
     text-decoration: none;
 }
 
-.contenuto> .utente
+.contenuto > form
 {
-    width: 50%;
+    width: 35%;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 10px;
-    background-color: bisque;
+    border-radius: 20px;
     border: 1px solid black;
 }
 
-.utente > a
+form > .colonna
 {
-    background-color: blue;
-    color: white;
+    width: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-left: 10px;
-    border-radius: 10px;
-    text-decoration: none;
+}
+
+h2
+{
+    font-size: 25px;
 }
 
 
+.colonna > label
+{
+    font-size: 16px;
+}
 
+.colonna > input
+{
+    width: 90%;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 3px;
+}
 
+.pulsanti
+{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.pulsanti > .reset
+{
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.pulsanti > .submit
+{
+    padding: 10px;
+    background-color: green;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+}
