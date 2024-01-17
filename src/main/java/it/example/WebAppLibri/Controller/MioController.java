@@ -116,6 +116,8 @@ public class MioController {
         if(user == null) {
             return "redirect:/login";
         }
+        libro = libroRepository.findById(idLibro);
+        model.addAttribute("libro", libro);
         return "modificaLibro";
     }
 
@@ -125,7 +127,13 @@ public class MioController {
             model.addAttribute("statoErrore", false);
             return "modificaLibro";
         }
-        return "redirect:/home";
+        Libro libroModificato = libroRepository.findById(idLibro);
+        libroModificato.setTitolo(libro.getTitolo());
+        libroModificato.setPrezzo(libro.getPrezzo());
+        libroModificato.setAnnoPubblicazione(libro.getAnnoPubblicazione());
+        libroModificato.setAutore(libro.getAutore());
+        libroRepository.save(libroModificato);
+        return "redirect:/libro/" + libroModificato.getId();
     }
 
     @GetMapping(value = "/libri")

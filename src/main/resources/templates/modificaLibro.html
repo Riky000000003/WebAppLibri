@@ -10,26 +10,26 @@
     <h1>Libreria Store</h1>
 </div>
     <div class="contenuto">
-        <form action="#" th:action="@{/modifica}" th:object="${libro}" method="post">
+        <form action="#" th:action="@{/modifica/{idLibro}(idLibro=${libro.id})}" th:object="${libro}" method="post">
             <h2>Modifica Libro</h2>
             <div class="colonna">
                 <label for="titolo">Inserisci il titolo del libro</label>
-                <input id="titolo" type="text" th:field="*{titolo}" placeholder="inserisci titolo"/>
+                <input id="titolo" type="text" th:field="*{titolo}"/>
                 <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}">titolo non conforme</p>
             </div>
             <div class="colonna">
                 <label for="autore">Inserisci il nome dell'autore</label>
-                <input id="autore" type="text" th:field="*{autore}" placeholder="inserisci autore"/>
+                <input id="autore" type="text" th:field="*{autore}"/>
                 <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('autore')}" th:errors="*{autore}">Autore non conforme</p>
             </div>
             <div class="colonna">
                 <label for="anno">Inserisci l'anno di pubblicazione</label>
-                <input id="anno" type="number" th:field="*{annoPubblicazione}" placeholder="inserisci anno"/>
+                <input id="anno" type="number" th:field="*{annoPubblicazione}"/>
                 <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('annoPubblicazione')}" th:errors="*{annoPubblicazione}">Anno pubblicazione non conforme</p>
             </div>
             <div class="colonna">
                 <label for="prezzo">Inserisci il prezzo</label>
-                <input id="prezzo" type="number" th:field="*{prezzo}" placeholder="inserisci prezzo"/>
+                <input id="prezzo" type="number" th:field="*{prezzo}"/>
                 <p style="color: red; font-size: 13px" th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}">Prezzo non conforme</p>
             </div>
             <div class="pulsanti">

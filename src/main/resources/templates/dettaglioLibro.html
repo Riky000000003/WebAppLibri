@@ -18,7 +18,7 @@
         <div class="libro">
             <h3 th:text="'Titolo: ' +${libro.titolo}"></h3>
             <p th:text="'Autore: ' +${libro.autore}"></p>
-            <p th:text="'Anno Pubblicazione: ' +${libro.autore}"></p>
+            <p th:text="'Anno Pubblicazione: ' +${libro.annoPubblicazione}"></p>
             <p th:text="'Prezzo: ' +${libro.prezzo}"></p>
             <a th:href="'/modifica/' + ${libro.id}">Modifica</a>
         </div>
