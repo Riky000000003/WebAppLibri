@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Libreria Store</title>
+    <link th:href="@{Style/styleHome.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="intestazione">
+    <h1>I tuoi libri</h1>
+</div>
+<div class="contenuto">
+    <div class="menu">
+        <a href="/home">Home</a>
+        <a href="/aggiungi">Aggiungi Libro</a>
+        <a href="/profilo">Profilo</a>
+    </div>
+    <div class="listaLibri">
+        <th:block th:each="libro : ${libri}">
+            <div class="libro">
+                <h3 th:text="'Titolo:' + ${libro.titolo}"></h3>
+                <p th:text="'Autore:' + ${libro.autore}"></p>
+                <p th:text="'Anno di pubblicazione:' + ${libro.annoPubblicazione}"></p>
+                <p th:text="'Prezzo:' + ${libro.prezzo}"></p>
+                <a th:href="'/libro/' + ${libro.id}">Dettaglio</a>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

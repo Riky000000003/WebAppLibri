@@ -128,4 +128,15 @@ public class MioController {
         return "redirect:/home";
     }
 
+    @GetMapping(value = "/libri")
+    public String getLibriUtente(HttpSession httpSession, Model model) {
+        User user = (User)  httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        List<Libro> libri = libroRepository.libriUtenti(user.getId());
+        model.addAttribute("libri", libri);
+        return "libriUtente";
+    }
+
 }
