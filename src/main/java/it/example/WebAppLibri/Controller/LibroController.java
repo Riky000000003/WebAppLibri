@@ -135,7 +135,7 @@ public class LibroController {
         return "redirect:/home";
     }
 
-    @GetMapping("/sincronizza")
+    /*@GetMapping("/sincronizza")
     @ResponseBody
     public String getLibriDatabase() {
         String url = "https://www.googleapis.com/books/v1/volumes?q=search+terms";
@@ -164,6 +164,6 @@ public class LibroController {
         }
         Gson gson = new Gson();
         return gson.toJson(root);
-    }
+    } */
 
 }
