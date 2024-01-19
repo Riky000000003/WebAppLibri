@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -58,5 +59,17 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return id == user.id && Objects.equals(nome, user.nome) && Objects.equals(cognome, user.cognome) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(libri, user.libri);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, cognome, username, password, libri);
     }
 }

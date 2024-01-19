@@ -1,6 +1,8 @@
 package it.example.WebAppLibri.Controller;
 
+import it.example.WebAppLibri.Dao.LibroDao;
 import it.example.WebAppLibri.Dao.UserDao;
+import it.example.WebAppLibri.Model.Libro;
 import it.example.WebAppLibri.Model.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -17,6 +20,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserDao userRepository;
+    @Autowired
+    private LibroDao libroRepository;
 
     @GetMapping(value = "/")
     public String registraForm(User user) {
@@ -79,5 +84,23 @@ public class UserController {
         }
         model.addAttribute("utenti", utenti);
         return "listaUtenti";
+    }
+
+    @GetMapping(value = "/utenti/{id}")
+    public String eliminaUtente(@PathVariable("id") long idUtente) {
+        User user =  userRepository.findById(idUtente);
+        if (user == null) {
+            return "redirect:/profilo";
+        }
+        for (Libro libro: libroRepository.findAll()) {
+            if (libro.getUtente() != null) {
+                if (libro.getUtente().equals(user)) {
+                    libro.setUtente(null);
+                    libroRepository.save(libro);
+                }
+            }
+        }
+        userRepository.delete(user);
+        return "redirect:/";
     }
 }
