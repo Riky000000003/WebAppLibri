@@ -63,13 +63,20 @@ public class UserController {
     @GetMapping(value = "/profilo")
     public String profiloPage(Model model, HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("utente", user);
         return "dettaglioUtente";
     }
 
     @GetMapping(value = "/utenti")
-    public String getListaUtenti(Model model) {
+    public String getListaUtenti(Model model, HttpSession httpSession) {
         List<User> utenti = (List<User>) userRepository.findAll();
+        User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("utenti", utenti);
         return "listaUtenti";
     }

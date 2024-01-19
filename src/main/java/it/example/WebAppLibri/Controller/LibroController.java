@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,14 +31,22 @@ public class LibroController {
     }
 
     @GetMapping(value = "/libro/{id}")
-    public String libroPage(@PathVariable("id")long id, Model model) {
+    public String libroPage(@PathVariable("id")long id, Model model, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         Libro libro = libroRepository.findById(id);
         model.addAttribute("libro", libro);
         return "dettaglioLibro";
     }
 
     @GetMapping(value = "/aggiungi")
-    public String aggiungiForm(Libro libro) {
+    public String aggiungiForm(Libro libro, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         return "libroForm";
     }
 
@@ -102,9 +111,25 @@ public class LibroController {
     }
 
     @GetMapping(value = "/noleggio/{id}")
-    public String getNoleggio(@PathVariable("id") long idLibro, Model model) {
+    public String getNoleggio(@PathVariable("id") long idLibro, Model model,  HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("idLibro", idLibro);
         model.addAttribute("utenti", userRepository.findAll());
         return "noleggioLibro";
+    }
+
+    @PostMapping(value = "/noleggio/{id}")
+    public String postNoleggio(@PathVariable("id") long idLibro, @RequestParam("utente") long idUtente) {
+        User user = userRepository.findById(idUtente);
+        if (user == null) {
+            return "redirect:/noleggio/" + idLibro;
+        }
+        Libro libro = libroRepository.findById(idLibro);
+        libro.setUtente(user);
+        libroRepository.save(libro);
+        return "redirect:/home";
     }
 }
