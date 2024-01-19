@@ -1,6 +1,7 @@
 package it.example.WebAppLibri.Controller;
 
 import it.example.WebAppLibri.Dao.LibroDao;
+import it.example.WebAppLibri.Dao.UserDao;
 import it.example.WebAppLibri.Model.Libro;
 import it.example.WebAppLibri.Model.User;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,8 @@ import java.util.List;
 public class LibroController {
     @Autowired
     private LibroDao libroRepository;
+    @Autowired
+    private UserDao userRepository;
 
     @GetMapping(value = "/home")
     public String homePage(Model model) {
@@ -50,7 +53,6 @@ public class LibroController {
             model.addAttribute("errore", "Errore non sei loggato");
             return "redirect:/login";
         }
-        libro.setUtente(user);
         libroRepository.save(libro);
         return "redirect:/home";
     }
@@ -97,5 +99,12 @@ public class LibroController {
         Libro libro = libroRepository.findById(idLibro);
         libroRepository.delete(libro);
         return "redirect:/libri";
+    }
+
+    @GetMapping(value = "/noleggio/{id}")
+    public String getNoleggio(@PathVariable("id") long idLibro, Model model) {
+        model.addAttribute("idLibro", idLibro);
+        model.addAttribute("utenti", userRepository.findAll());
+        return "noleggioLibro";
     }
 }

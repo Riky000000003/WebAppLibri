@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Noleggio</title>
+    <link th:href="@{Style/styleNoleggio.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <h1>Noleggio</h1>
+    </div>
+    <div class="div">
+        <div class="noleggio">
+            <h2>Noleggia il libro</h2>
+            <form action="#" th:action="@{/noleggio/{id}(id=${idLibro})}" method="post">
+                <div class="colonna">
+                    <label for="select">Inserisci l'utente da noleggiare</label>
+                    <select id="select" name="utente">
+                        <option value="0">Utente</option>
+                        <th:block th:each="utente : ${utenti}">
+                            <option th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome} "></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="pulsanti">
+                    <button th:href="@{/home}">Annulla</button>
+                    <button type="submit">Noleggia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

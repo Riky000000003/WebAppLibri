@@ -20,6 +20,7 @@
             <p th:text="'Autore: ' +${libro.autore}"></p>
             <p th:text="'Anno Pubblicazione: ' +${libro.annoPubblicazione}"></p>
             <p th:text="'Prezzo: ' +${libro.prezzo}"></p>
+            <p th:if="${libro.utente != null}" th:text="'Noleggiato da: ' +${libro.utente.nome} + ' ' + ${libro.utente.cognome}"></p>
             <a th:href="'/modifica/' + ${libro.id}">Modifica</a>
             <a th:href="'/elimina/' + ${libro.id}">Elimina</a>
         </div>

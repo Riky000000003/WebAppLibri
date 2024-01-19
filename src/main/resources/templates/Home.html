@@ -14,6 +14,7 @@
             <a href="/libri">I tuoi Libri</a>
             <a href="/aggiungi">Aggiungi Libro</a>
             <a href="/profilo">Profilo</a>
+            <a href="/utenti">Lista Utenti</a>
         </div>
         <div class="listaLibri">
             <th:block th:each="libro : ${libri}">
@@ -22,6 +23,7 @@
                     <p th:text="'Autore:' + ${libro.autore}"></p>
                     <p th:text="'Anno di pubblicazione:' + ${libro.annoPubblicazione}"></p>
                     <p th:text="'Prezzo:' + ${libro.prezzo}"></p>
+                    <a th:if="${libro.utente == null}" th:href="'/noleggio/' + ${libro.id}">Noleggio</a>
                 </div>
             </th:block>
         </div>
