@@ -16,7 +16,7 @@ public class Libro implements Serializable {
     private long id;
     @Column(name = "Titolo")
     @NotNull
-    @Size(min = 3, max = 20, message = "titolo non conforme min = 3, max = 20")
+    @Size(min = 1, message = "titolo non conforme min = 3, max = 20")
     private String titolo;
     @Column(name = "autore")
     @NotNull
